@@ -25,7 +25,7 @@ namespace keepr_server.Repositories
     //   SELECT 
     //       keep.*, 
     //       profile.*,
-    //       COUNT(vaultKeep.keepId) AS Keeps
+    //       vaultKeep.*
     //           FROM keeps keep
     //               JOIN profiles profile
     //                   ON profile.id = keep.creatorId
@@ -53,6 +53,10 @@ namespace keepr_server.Repositories
     {
       string sql = sqlGet + "WHERE keep.id = @id";
       Keep keep = _db.Query<Keep, Profile, Keep>(sql, (k, p) => { k.Creator = p; return k; }, new { id }, splitOn: "id").FirstOrDefault<Keep>();
+      string sqlCount = "SELECT COUNT(*) FROM vaultKeeps WHERE keepId = @id";
+      // Get the update the keeps and also return
+      keep.Keeps = _db.QueryFirst<int>(sqlCount, new { id })
+      UpdateKeeps(keep);
       return keep;
     }
 
@@ -96,6 +100,12 @@ namespace keepr_server.Repositories
             WHERE id = @id
       ";
       _db.Execute(sql2, new { id, views });
+    }
+
+    internal void UpdateKeeps(Keep keep)
+    {
+      string sql = "UPDATE keeps SET keeps = @Keeps WHERE id = @Id";
+      _db.Execute(sql, keep);
     }
 
     // DONE[epic=Keeps] Increment views
