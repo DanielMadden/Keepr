@@ -12,6 +12,7 @@ namespace keepr_server.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
+  [Authorize]
   public class VaultsController : ControllerBase
   {
 
@@ -25,16 +26,42 @@ namespace keepr_server.Controllers
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Vault> GetById(int id)
+    [AllowAnonymous]
+    public async Task<ActionResult<Vault>> GetById(int id)
     {
-      try { return Ok(_serviceVault.GetById(id)); }
+      try
+      {
+        if (_serviceVault.CheckPrivate(id))
+        {
+          Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+          return Ok(_serviceVault.GetById(id, userInfo.Id));
+        }
+        else
+        {
+          return Ok(_serviceVault.GetById(id));
+        }
+      }
       catch (Exception err) { return BadRequest(err.Message); }
     }
 
     [HttpGet("{vaultId}/keeps")]
-    public ActionResult<IEnumerable<Keep>> GetKeepsByVaultId(int vaultId)
+    [AllowAnonymous]
+    public async Task<ActionResult<IEnumerable<Keep>>> GetKeepsByVaultId(int vaultId)
     {
-      try { return Ok(_serviceVaultKeep.GetKeepsByVaultId(vaultId)); }
+      try
+      {
+        if (_serviceVault.CheckPrivate(vaultId))
+        {
+          Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+          _serviceVault.GetById(vaultId, userInfo.Id);
+          return Ok(_serviceVaultKeep.GetKeepsByVaultId(vaultId));
+        }
+        else
+        {
+          _serviceVault.GetById(vaultId);
+          return Ok(_serviceVaultKeep.GetKeepsByVaultId(vaultId));
+        }
+      }
       catch (Exception err) { return BadRequest(err.Message); }
     }
 
@@ -53,17 +80,25 @@ namespace keepr_server.Controllers
 
     [HttpPut("{id}")]
     [Authorize]
-    public ActionResult<Vault> Edit(int id, [FromBody] JsonElement edits)
+    public async Task<ActionResult<Vault>> Edit(int id, [FromBody] JsonElement edits)
     {
-      try { return Ok(_serviceVault.Edit(id, edits)); }
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_serviceVault.Edit(id, edits, userInfo.Id));
+      }
       catch (Exception err) { return BadRequest(err.Message); }
     }
 
     [HttpDelete("{id}")]
     [Authorize]
-    public ActionResult<string> Delete(int id)
+    public async Task<ActionResult<string>> Delete(int id)
     {
-      try { return Ok(_serviceVault.Delete(id) + " rows deleted"); }
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_serviceVault.Delete(id, userInfo.Id) + " rows deleted");
+      }
       catch (Exception err) { return BadRequest(err.Message); }
     }
   }

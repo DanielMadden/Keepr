@@ -28,6 +28,12 @@ namespace keepr_server.Repositories
       return _db.Query<VaultKeepViewModel, Profile, VaultKeepViewModel>(sql, (vkvm, p) => { vkvm.Creator = p; return vkvm; }, new { vaultId }, splitOn: "id");
     }
 
+    public VaultKeep GetById(int id)
+    {
+      string sql = "SELECT * FROM vaultKeeps WHERE id = @id";
+      return _db.QueryFirstOrDefault<VaultKeep>(sql, new { id });
+    }
+
     public VaultKeep Create(VaultKeep newVaultKeep)
     {
       string sql = @"

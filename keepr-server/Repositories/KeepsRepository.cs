@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -19,6 +20,24 @@ namespace keepr_server.Repositories
                   JOIN profiles profile
                       ON profile.id = keep.creatorId
     ";
+
+    // private readonly string sqlGet = @"
+    //   SELECT 
+    //       keep.*, 
+    //       profile.*,
+    //       COUNT(vaultKeep.keepId) AS Keeps
+    //           FROM keeps keep
+    //               JOIN profiles profile
+    //                   ON profile.id = keep.creatorId
+    //               JOIN vaultKeeps vaultKeep
+    //                   ON vaultKeep.keepId = keep.id
+    // ";
+
+    //     private string sqlGetString(string WHERE = "") {
+    // return sqlGet + WHERE + "; SELECT COUNT() FROM "
+    //     }
+
+    //TODO[epic=Keeps] Have SQL collect all vaultkeeps with the keep's id, then have dapper assign it with .Length()
     public IEnumerable<Keep> GetAll()
     {
       return _db.Query<Keep, Profile, Keep>(sqlGet, (k, p) => { k.Creator = p; return k; }, splitOn: "id");
@@ -58,14 +77,29 @@ namespace keepr_server.Repositories
         SET
           name = @Name,
           description = @Description,
-          img = @Img,
-          views = @Views,
-          shares = @Shares
+          img = @Img
         WHERE id = @id
       ";
       _db.Execute(sql, newKeep);
       return newKeep;
     }
+
+    internal void AddView(int id)
+    {
+      string sql = "SELECT views FROM keeps WHERE id = @id";
+      int views = _db.QueryFirstOrDefault<int>(sql, new { id });
+      views++;
+      string sql2 = @"
+      UPDATE keeps
+        SET
+          views = @views
+            WHERE id = @id
+      ";
+      _db.Execute(sql2, new { id, views });
+    }
+
+    // DONE[epic=Keeps] Increment views
+    // TODO[epic=Keeps] Increment shares
 
     public int Delete(int id)
     {

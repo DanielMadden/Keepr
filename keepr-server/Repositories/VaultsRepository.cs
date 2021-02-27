@@ -20,9 +20,10 @@ namespace keepr_server.Repositories
                           ON profile.id = vault.creatorId
     ";
 
-    public IEnumerable<Vault> GetByProfileId(string profileId)
+    public IEnumerable<Vault> GetByProfileId(string profileId, bool filter = false)
     {
       string sql = sqlGet + "WHERE vault.creatorId = @profileId";
+      if (filter) { sql += " AND vault.isPrivate = 0"; }
       return _db.Query<Vault, Profile, Vault>(sql, (v, p) => { v.Creator = p; return v; }, new { profileId }, splitOn: "id");
     }
 

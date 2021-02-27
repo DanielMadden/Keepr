@@ -37,9 +37,13 @@ namespace keepr_server.Controllers
 
     [HttpDelete("{id}")]
     [Authorize]
-    public ActionResult<string> Delete(int id)
+    public async Task<ActionResult<string>> Delete(int id)
     {
-      try { return Ok(_serviceVaultKeep.Delete(id) + " rows deleted"); }
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_serviceVaultKeep.Delete(id, userInfo.Id) + " rows deleted");
+      }
       catch (Exception err) { return BadRequest(err.Message); }
     }
   }

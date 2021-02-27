@@ -20,20 +20,29 @@ namespace keepr_server.Services
     {
       Keep keep = _repoKeep.GetById(id);
       if (keep == null) { throw new Exception("No keep with id " + id); }
+      _repoKeep.AddView(id);
+      keep.Views++;
       return keep;
     }
     public Keep Create(Keep newKeep) { return _repoKeep.Create(newKeep); }
-    public Keep Edit(int id, JsonElement edits)
+    public Keep Edit(int id, JsonElement edits, string userId)
     {
-      Keep keep = _repoKeep.GetById(id);
+      Keep keep = PreCheck(id, userId);
       keep.Edit(edits);
       return _repoKeep.Edit(keep);
     }
-    public int Delete(int id)
+    public int Delete(int id, string userId)
+    {
+      PreCheck(id, userId);
+      return _repoKeep.Delete(id);
+    }
+
+    public Keep PreCheck(int id, string userId)
     {
       Keep keep = _repoKeep.GetById(id);
       if (keep == null) { throw new Exception("No keep with id " + id); }
-      return _repoKeep.Delete(id);
+      if (keep.CreatorId != userId) { throw new Exception("Not authorized"); }
+      return keep;
     }
   }
 }

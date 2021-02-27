@@ -39,8 +39,8 @@ namespace keepr_server.Models
       if (edits.TryGetProperty("name", out JsonElement newName)) { Name = newName.ToString(); }
       if (edits.TryGetProperty("description", out JsonElement newDescription)) { Description = newDescription.ToString(); }
       if (edits.TryGetProperty("img", out JsonElement newImg)) { Img = newImg.ToString(); }
-      if (edits.TryGetProperty("views", out JsonElement newViews)) { Views = newViews.GetInt32(); }
-      if (edits.TryGetProperty("shares", out JsonElement newShares)) { Shares = newShares.GetInt32(); }
+      // if (edits.TryGetProperty("views", out JsonElement newViews)) { Views = newViews.GetInt32(); }
+      // if (edits.TryGetProperty("shares", out JsonElement newShares)) { Shares = newShares.GetInt32(); }
     }
   }
 

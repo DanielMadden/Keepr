@@ -14,6 +14,14 @@ namespace keepr_server.Services
 
     public IEnumerable<Keep> GetKeepsByVaultId(int vaultId) { return _repoVaultKeep.GetKeepsByVaultId(vaultId); }
     public VaultKeep Create(VaultKeep newVaultKeep) { return _repoVaultKeep.Create(newVaultKeep); }
-    public int Delete(int id) { return _repoVaultKeep.Delete(id); }
+    public int Delete(int id, string userId) { PreCheck(id, userId); return _repoVaultKeep.Delete(id); }
+
+    public void PreCheck(int id, string userId)
+    {
+      VaultKeep vaultKeep = _repoVaultKeep.GetById(id);
+      if (vaultKeep == null) { throw new Exception("No vaultKeep by id " + id); }
+      if (vaultKeep.CreatorId != userId) { throw new Exception("Not authorized"); }
+    }
+
   }
 }

@@ -51,17 +51,25 @@ namespace keepr_server.Controllers
 
     [HttpPut("{id}")]
     [Authorize]
-    public ActionResult<Keep> Edit(int id, [FromBody] JsonElement edits)
+    public async Task<ActionResult<Keep>> Edit(int id, [FromBody] JsonElement edits)
     {
-      try { return Ok(_serviceKeep.Edit(id, edits)); }
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_serviceKeep.Edit(id, edits, userInfo.Id));
+      }
       catch (Exception err) { return BadRequest(err.Message); }
     }
 
     [HttpDelete("{id}")]
     [Authorize]
-    public ActionResult<string> Delete(int id)
+    public async Task<ActionResult<string>> Delete(int id)
     {
-      try { return Ok(_serviceKeep.Delete(id) + " rows deleted"); }
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_serviceKeep.Delete(id, userInfo.Id) + " rows deleted");
+      }
       catch (Exception err) { return BadRequest(err.Message); }
     }
   }

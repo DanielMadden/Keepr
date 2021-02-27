@@ -10,7 +10,6 @@ namespace keepr_server.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  // REVIEW[epic=Authentication] this tag enforces the user must be logged in
   [Authorize]
   public class AccountController : ControllerBase
   {
@@ -22,13 +21,10 @@ namespace keepr_server.Controllers
     }
 
     [HttpGet]
-    // REVIEW[epic=Authentication] async calls must return a System.Threading.Tasks, this is equivalent to a promise in JS
     public async Task<ActionResult<Profile>> Get()
     {
       try
       {
-        // REVIEW[epic=Authentication] how to get the user info from the request token
-        // same as to req.userInfo
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
         return Ok(_ps.GetOrCreateProfile(userInfo));
       }
