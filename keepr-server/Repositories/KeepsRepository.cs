@@ -55,7 +55,7 @@ namespace keepr_server.Repositories
       Keep keep = _db.Query<Keep, Profile, Keep>(sql, (k, p) => { k.Creator = p; return k; }, new { id }, splitOn: "id").FirstOrDefault<Keep>();
       string sqlCount = "SELECT COUNT(*) FROM vaultKeeps WHERE keepId = @id";
       // Get the update the keeps and also return
-      keep.Keeps = _db.QueryFirst<int>(sqlCount, new { id })
+      keep.Keeps = _db.QueryFirst<int>(sqlCount, new { id });
       UpdateKeeps(keep);
       return keep;
     }

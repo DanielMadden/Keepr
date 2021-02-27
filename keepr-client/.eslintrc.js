@@ -20,7 +20,7 @@ module.exports = {
   rules: {
     'no-console': PROD ? ERROR : WARN,
     'no-debugger': PROD ? ERROR : WARN,
-    'space-before-function-paren': [WARN, NEVER],
+    'space-before-function-paren': OFF,
     'vue/max-attributes-per-line': [ERROR, {
       singleline: 5,
       multiline: {
