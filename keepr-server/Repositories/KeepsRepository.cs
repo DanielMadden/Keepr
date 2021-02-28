@@ -56,7 +56,7 @@ namespace keepr_server.Repositories
       string sqlCount = "SELECT COUNT(*) FROM vaultKeeps WHERE keepId = @id";
       // Get the update the keeps and also return
       keep.Keeps = _db.QueryFirst<int>(sqlCount, new { id });
-      UpdateKeeps(keep);
+      // UpdateKeeps(keep);
       return keep;
     }
 
@@ -102,11 +102,11 @@ namespace keepr_server.Repositories
       _db.Execute(sql2, new { id, views });
     }
 
-    internal void UpdateKeeps(Keep keep)
-    {
-      string sql = "UPDATE keeps SET keeps = @Keeps WHERE id = @Id";
-      _db.Execute(sql, keep);
-    }
+    // internal void UpdateKeeps(Keep keep)
+    // {
+    //   string sql = "UPDATE keeps SET keeps = @Keeps WHERE id = @Id";
+    //   _db.Execute(sql, keep);
+    // }
 
     // DONE[epic=Keeps] Increment views
     // TODO[epic=Keeps] Increment shares
