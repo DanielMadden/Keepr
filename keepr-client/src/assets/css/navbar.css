@@ -1,0 +1,98 @@
+@import "global.css";
+#my-nav-bar {
+  top: 0;
+  left: 0;
+  height: 5em;
+  width: 100%;
+  position: fixed;
+  background-color: var(--accent-color);
+  color: var(--accent-color-text);
+  --item-height: 60%;
+}
+
+#my-nav-row {
+  height: 100%;
+}
+
+.my-nav-column {
+  height: 100%;
+  position: relative;
+}
+
+#nav-home-button {
+  height: var(--item-height);
+  width: 40px;
+  border: 3px solid var(--accent-color-text);
+  background-color: transparent;
+  /* border-radius: 10px; */
+}
+
+#nav-search-box {
+  width: 80%;
+  height: var(--item-height);
+  position: relative;
+  --padding-x: 1em;
+  --padding-y: .5em;
+  font-size: 120%;
+}
+
+#nav-search-input {
+  width: 100%;
+  height: 100%;
+  padding: var(--padding-y);
+  padding-left: var(--padding-x);
+  border-radius: 10px;
+  border: none;
+}
+
+#nav-search-input:focus {
+  outline: none;
+}
+
+#nav-search-icon {
+  position: absolute;
+  top: 0;
+  right: var(--padding-x);
+  height: 100%;
+  width: fit-content;
+  color: var(--accent-color);
+}
+
+.my-nav-button {
+  border: none;
+  background-color: var(--accent-color-button);
+  color: white;
+  height: var(--item-height);
+  font-size: 120%;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-radius: 10px;
+}
+
+.my-nav-button .mr-3 i {
+  font-size: 160%;
+}
+
+/* #my-nav-logo {
+  height: 65px;
+  width: 50px;
+  position: absolute;
+}
+
+#my-nav-logo img {
+  height: 100%;
+  width: 100%;
+}
+
+#my-nav-logo div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#my-nav-logo div img {
+  height: 70%;
+  width: 70%;
+} */

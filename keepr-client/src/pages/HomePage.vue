@@ -1,15 +1,7 @@
 <template>
   <div
     class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center"
-  >
-    <img
-      src="https://bcw.blob.core.windows.net/public/img/8600856373152463"
-      alt="CodeWorks Logo"
-    />
-    <h1 class="my-5 bg-dark text-light p-3 rounded d-flex align-items-center">
-      <span class="mx-2 text-white">Vue 3 Starter</span>
-    </h1>
-  </div>
+  ></div>
 </template>
 
 <script>
@@ -18,8 +10,9 @@ import { api } from '../services/AxiosService'
 export default {
   name: 'Home',
   setup() {
-    onMounted(() => {
-      api.get('/api/keeps')
+    onMounted(async () => {
+      const keeps = await api.get('/api/keeps')
+      console.log(keeps)
     })
   }
 }

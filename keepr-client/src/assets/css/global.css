@@ -1,0 +1,19 @@
+/* @import "bootstrap"; */
+
+:root {
+  --accent-color: var(--myColor-aqua);
+  --accent-color-text: var(--myColor-dark);
+  --accent-color-button: var(--myColor-dark);
+}
+
+:root {
+  --myColor-aqua: #9ecccc;
+  --myColor-lime: #b5d333;
+  --myColor-teal: #42646b;
+  --myColor-yellow: #c8a355;
+  --myColor-charcoal: #807e81;
+  --myColor-smoky-blue: #98a6b3;
+  --myColor-purple: #60323f;
+  --myColor-brown: #5b4a40;
+  --myColor-dark: rgb(36, 39, 41);
+}
