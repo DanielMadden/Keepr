@@ -1,0 +1,8 @@
+@import "global.css";
+.modal-add-button-create {
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: var(--accent-color-dark);
+  padding: .25em .5em .25em .5em;
+}

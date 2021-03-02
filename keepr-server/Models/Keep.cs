@@ -21,6 +21,9 @@ namespace keepr_server.Models
     public int Views { get; set; }
     public int Shares { get; set; }
     public int Keeps { get; set; }
+
+    // TODO add tags
+    // public IEnumerable<Tag> Tags { get; set; }
     public Profile Creator { get; set; }
 
     public Keep(string creatorId, string name, string description, string img, int views, int shares, Profile creator)

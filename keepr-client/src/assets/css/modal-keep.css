@@ -1,0 +1,42 @@
+@import "global.css";
+:root {}
+
+#modal-keep-container {
+  --padding: 1em;
+  padding: 0 var(--padding) 0 var(--padding);
+}
+
+#modal-keep-img {
+  border-radius: 10px;
+}
+
+.modal-keep-stats i {
+  color: var(--accent-color)
+}
+
+#modal-keep-row-title, #modal-keep-row-description {
+  padding: 0 var(--padding) 0 calc(var(--padding) * 2);
+}
+
+#modal-keep-description {
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+#modal-keep-row-tags {
+  padding-left: var(--padding);
+}
+
+#modal-keep-tags {
+  width: 80%;
+  border-top: 1px solid var(--myColor-smoky-blue);
+}
+
+#modal-keep-row-bottom {
+  padding-left: var(--padding);
+}
+
+#modal-keep-profile-picture {
+  width: 1.5em;
+  height: 1.5em;
+}

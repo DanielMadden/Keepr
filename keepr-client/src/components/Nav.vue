@@ -3,7 +3,7 @@
     <div id="my-nav-row" class="row">
       <div class="col-3 my-nav-column d-flex justify-content-start align-items-center">
         <button
-          id="nav-home-button"
+          id="nav-logo"
           class="d-flex justify-content-center align-items-center"
         >
           <h1 class="m-0">
@@ -41,13 +41,14 @@
         </button>
         <button
           class="my-nav-button d-flex align-items-center"
+          @click="openProfile()"
           v-else
         >
           <span class="mr-3">
             <i class="far fa-user"></i>
           </span>
           <span>
-            Daniel Madden
+            {{ user.name }}
           </span>
         </button>
       </div>
@@ -58,14 +59,20 @@
 import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { AuthService } from '../services/AuthService'
+import { useRouter } from 'vue-router'
 export default {
   setup() {
     // Variables
+    const router = useRouter()
     const form = reactive({ text: '' })
     const user = computed(() => AppState.user)
+    const account = computed(() => AppState.account)
     // Functions
     const login = async () => { AuthService.loginWithPopup() }
     const search = () => {
+    }
+    const openProfile = () => {
+      router.push({ path: '/profile/' + account.value.id })
     }
     return {
       // Variables
@@ -73,7 +80,8 @@ export default {
       user,
       // Functions
       login,
-      search
+      search,
+      openProfile
     }
   }
 }

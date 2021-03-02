@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using keepr_server.Models;
 using keepr_server.Repositories;
 
@@ -16,6 +17,8 @@ namespace keepr_server.Services
       Profile profile = _repo.GetById(userInfo.Id);
       if (profile == null)
       {
+        string[] splitEmail = userInfo.Name.Split("@", 2);
+        userInfo.Name = splitEmail[0];
         return _repo.Create(userInfo);
       }
       return profile;

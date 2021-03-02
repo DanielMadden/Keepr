@@ -6,6 +6,7 @@ class AccountService {
   async getAccount() {
     try {
       const res = await api.get('/api/account')
+      res.data.name = res.data.name.split('@')[0]
       AppState.account = res.data
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)

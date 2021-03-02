@@ -1,9 +1,10 @@
 <template>
   <header>
     <!-- <Navbar /> -->
-    <Nav-Component></Nav-Component>
+    <Nav></Nav>
   </header>
   <main>
+    <Modal></Modal>
     <router-view v-slot="{ Component }">
       <transition name="route" mode="out-in">
         <component :is="Component" />

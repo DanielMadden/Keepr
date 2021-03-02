@@ -1,8 +1,12 @@
 @import "global.css";
+:root {
+  --nav-height: 5em;
+}
+
 #my-nav-bar {
   top: 0;
   left: 0;
-  height: 5em;
+  height: var(--nav-height);
   width: 100%;
   position: fixed;
   background-color: var(--accent-color);
@@ -19,7 +23,7 @@
   position: relative;
 }
 
-#nav-home-button {
+#nav-logo {
   height: var(--item-height);
   width: 40px;
   border: 3px solid var(--accent-color-text);

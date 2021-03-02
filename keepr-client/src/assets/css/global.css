@@ -2,12 +2,14 @@
 
 :root {
   --accent-color: var(--myColor-aqua);
+  --accent-color-dark: var(--myColor-teal);
   --accent-color-text: var(--myColor-dark);
   --accent-color-button: var(--myColor-dark);
 }
 
 :root {
-  --myColor-aqua: #9ecccc;
+  --bcwColor-green: #55EFC4;
+  --myColor-aqua: #82dddd;
   --myColor-lime: #b5d333;
   --myColor-teal: #42646b;
   --myColor-yellow: #c8a355;
@@ -16,4 +18,36 @@
   --myColor-purple: #60323f;
   --myColor-brown: #5b4a40;
   --myColor-dark: rgb(36, 39, 41);
+}
+
+:root {
+  --viewport-padding-x: 3em;
+  --viewport-padding-y: 3em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+.viewport {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  height: calc(100% - var(--nav-height));
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: var(--viewport-padding-x);
+  padding-left: var(--viewport-padding-x);
+  padding-top: var(--viewport-padding-y);
+}
+
+.masonry-4 {
+  column-count: 4;
+  column-gap: 1em;
+}
+
+.masonry-6 {
+  column-count: 6;
+  column-gap: .5em;
 }

@@ -1,0 +1,19 @@
+@import "global.css";
+@import "keep.css";
+#profile-picture {
+  width: 10em;
+  height: 10em;
+  border-radius: 10px;
+}
+
+.profile-button-add {
+  width: 1em;
+  height: 1em;
+  color: var(--accent-color);
+  font-size: 2em;
+}
+
+.profile-button-add:hover {
+  color: white;
+  background-color: var(--accent-color);
+}

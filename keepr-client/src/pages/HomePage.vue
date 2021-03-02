@@ -1,30 +1,32 @@
 <template>
-  <div
-    class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center"
-  ></div>
+  <div class="viewport">
+    <div class="masonry-4">
+      <Keep v-for="keep in keeps" :key="keep.id" :keep="keep"></Keep>
+    </div>
+  </div>
 </template>
 
 <script>
-import { onMounted } from 'vue'
-import { api } from '../services/AxiosService'
+import { computed, onMounted } from 'vue'
+import { keepService } from '../services/KeepService'
+import { AppState } from '../AppState'
+
 export default {
   name: 'Home',
   setup() {
+    const keeps = computed(() => AppState.homeKeeps)
     onMounted(async () => {
-      const keeps = await api.get('/api/keeps')
-      console.log(keeps)
+      keepService.getAll()
     })
+    return {
+      // Variables
+      keeps
+      // Functions
+    }
   }
 }
 </script>
 
-<style scoped lang="scss">
-.home {
-  text-align: center;
-  user-select: none;
-  > img {
-    height: 200px;
-    width: 200px;
-  }
-}
+<style scoped>
+@import "../assets/css/page-home.css";
 </style>
