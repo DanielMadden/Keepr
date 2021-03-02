@@ -49,5 +49,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .masonry-6 {
   column-count: 6;
-  column-gap: .5em;
+  column-gap: 1em;
+}
+
+.in-container {
+  margin-left: -15px;
+  margin-right: -15px;
 }

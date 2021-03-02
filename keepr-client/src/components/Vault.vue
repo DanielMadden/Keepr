@@ -1,8 +1,9 @@
 <template lang="">
   <div class="vault"
+       :style="`background: linear-gradient( rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0)), url('${vault.img}') no-repeat center center /cover; overflow-y: hidden`"
        @click="viewVault()"
   >
-    <img class="vault-img" :src="vault.img" />
+    <!-- <img class="vault-img" :src="vault.img" /> -->
     <div class="vault-darken"></div>
     <div class="vault-name">
       {{ vault.name }}
@@ -13,7 +14,6 @@
 import { useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { vaultService } from '../services/VaultService'
-import { openModal } from '../utils/Modal'
 export default {
   props: {
     vault: {
@@ -28,9 +28,9 @@ export default {
     }
     const viewVault = () => {
       AppState.activeVault = props.vault
-      vaultService.getOne(props.vault.id)
-      // TODO open the modal
-      openModal('vault')
+      vaultService.getVault(props.vault.id)
+      vaultService.getKeeps(props.vault.id)
+      travel()
     }
     return {
       // Variables

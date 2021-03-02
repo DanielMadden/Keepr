@@ -7,9 +7,9 @@ class ProfileService {
     AppState.activeProfile = res.data
   }
 
-  async getVaults(id) {
+  async getVaults(id, forUser = false) {
     const res = await api.get(baseURL + id + '/vaults')
-    AppState.activeProfileVaults = res.data
+    forUser ? AppState.activeUserVaults = res.data : AppState.activeProfileVaults = res.data
   }
 
   async getKeeps(id) {

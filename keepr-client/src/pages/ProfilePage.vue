@@ -32,7 +32,7 @@
         <div id="profile-row-vaults"
              class="row"
         >
-          <div class="col-2"
+          <div class="profile-col-vaults col-2"
                v-for="vault in vaults"
                :key="vault.id"
           >

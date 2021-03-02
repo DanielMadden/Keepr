@@ -33,6 +33,7 @@ namespace keepr_server.Models
       if (edits.TryGetProperty("name", out JsonElement newName)) { Name = newName.ToString(); }
       if (edits.TryGetProperty("description", out JsonElement newDescription)) { Description = newDescription.ToString(); }
       if (edits.TryGetProperty("isPrivate", out JsonElement newPrivacy)) { IsPrivate = newPrivacy.GetBoolean(); }
+      if (edits.TryGetProperty("img", out JsonElement newImg)) { Img = newImg.ToString(); }
       if (edits.TryGetProperty("Name", out JsonElement newName2)) { Name = newName2.ToString(); }
       if (edits.TryGetProperty("Description", out JsonElement newDescription2)) { Description = newDescription2.ToString(); }
       if (edits.TryGetProperty("IsPrivate", out JsonElement newPrivacy2)) { IsPrivate = newPrivacy2.GetBoolean(); }

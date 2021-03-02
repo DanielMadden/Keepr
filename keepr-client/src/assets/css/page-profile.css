@@ -17,3 +17,13 @@
   color: white;
   background-color: var(--accent-color);
 }
+
+.profile-col-vaults {
+  padding-left: .5em !important;
+  padding-right: .5em !important;
+}
+
+#profile-row-keeps {
+  padding-left: .5em;
+  padding-right: .5em
+}

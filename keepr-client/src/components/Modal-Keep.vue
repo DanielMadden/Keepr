@@ -40,7 +40,7 @@
         <p class="m-0"
            id="modal-keep-description"
         >
-          Lorem ipsum aowudhawuohdawudaiudhawiydgwd79awy awdawdahw dawd80ahw0d8h8 0182h 08wdh awodh 102d dhuawd8 h0812y 08yda0 8dhawdh l182 8awd hawiudh 812yd ahduiw lawud hlawud h9821 98ahdwiahlwduh1 028 dhawdh aiwhld 9812d hawld aiwd lauwdh 0182dy 8awh dialwd u1h2 08ahwdl awdu h102 wauhdlaw dhliawhd 0182hd aiwdl auiwdh 12h duahw diawhd 8102d hauwhdl awudh 0182hd uiwalhd uiwahd 1y2d
+          {{ keep.description }}
         </p>
       </div>
       <div class="row d-flex justify-content-center"
@@ -56,8 +56,25 @@
       <div class="row d-flex justify-content-between mt-3"
            id="modal-keep-row-bottom"
       >
-        <div id="modal-keep-add">
-          Add To Vault
+        <div class="dropdown">
+          <button id="modal-keep-add-to-vault"
+                  class="dropdown-toggle"
+                  type="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+          >
+            Add To Vault
+          </button>
+          <div class="dropdown-menu" aria-labelledby="modal-keep-add-to-vault">
+            <a class="dropdown-item"
+               v-for="vault in vaults"
+               :key="vault.id"
+               @click="keepToVault(vault.id)"
+            >{{ vault.name }}</a>
+            <!-- <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a> -->
+          </div>
         </div>
         <div id="modal-keep-delete">
           <i class="fa fa-trash"></i>
@@ -78,15 +95,33 @@
   </div>
 </template>
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
+import { profileService } from '../services/ProfileService'
+import { vaultKeepService } from '../services/VaultKeepService'
 export default {
   setup() {
+    // Variables
     const keep = computed(() => AppState.activeKeep)
+    const account = computed(() => AppState.account)
+    const vaults = computed(() => AppState.activeUserVaults)
+    // On Mounted
+    onMounted(() => {
+      profileService.getVaults(account.value.id, true)
+    })
+    // Functions
+    const keepToVault = (vaultId) => {
+      vaultKeepService.create({
+        vaultId: vaultId,
+        keepId: keep.value.id
+      })
+    }
     return {
       // Variables
-      keep
+      keep,
+      vaults,
       // Functions
+      keepToVault
     }
   }
 }

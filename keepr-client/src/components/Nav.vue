@@ -5,6 +5,7 @@
         <button
           id="nav-logo"
           class="d-flex justify-content-center align-items-center"
+          @click="homePage()"
         >
           <h1 class="m-0">
             K
@@ -68,9 +69,10 @@ export default {
     const user = computed(() => AppState.user)
     const account = computed(() => AppState.account)
     // Functions
-    const login = async () => { AuthService.loginWithPopup() }
+    const homePage = () => { router.push({ path: '/' }) }
     const search = () => {
     }
+    const login = async () => { AuthService.loginWithPopup() }
     const openProfile = () => {
       router.push({ path: '/profile/' + account.value.id })
     }
@@ -79,8 +81,9 @@ export default {
       form,
       user,
       // Functions
-      login,
+      homePage,
       search,
+      login,
       openProfile
     }
   }
