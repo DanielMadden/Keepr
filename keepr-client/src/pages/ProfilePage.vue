@@ -1,9 +1,9 @@
 <template lang="">
-  <div class="viewport">
+  <div class="viewport pinch">
     <div class="container-fluid">
       <div v-if="profile">
         <div id="profile-row-profile"
-             class="row d-flex justify-content-start"
+             class="row d-flex justify-content-start px-2"
         >
           <div id="profile-picture"
                class="mr-5"
@@ -17,17 +17,18 @@
             <h3>Keeps: {{ keeps.length }}</h3>
           </div>
         </div>
+        <div class="row pt-3 pb-5"></div>
         <div id="profile-row-name-vaults"
-             class="row d-flex justify-content-start align-items-center"
+             class="row d-flex justify-content-start align-items-center px-2 mb-3"
         >
           <h1 class="mr-3">
             Vaults
           </h1>
-          <div class="profile-button-add d-flex justify-content-center align-items-center"
-               @click="addVault()"
+          <button class="profile-button-add d-flex justify-content-center align-items-center"
+                  @click="addVault()"
           >
-            <span>+</span>
-          </div>
+            <i class="fas fa-plus"></i>
+          </button>
         </div>
         <div id="profile-row-vaults"
              class="row"
@@ -39,17 +40,18 @@
             <Vault :vault="vault"></Vault>
           </div>
         </div>
+        <div class="row py-3"></div>
         <div id="profile-row-name-keeps"
-             class="row d-flex justify-content-start align-items-center"
+             class="row d-flex justify-content-start align-items-center px-2 mb-3"
         >
           <h1 class="mr-3">
             Keeps
           </h1>
-          <div class="profile-button-add d-flex justify-content-center align-items-center"
-               @click="addKeep()"
+          <button class="profile-button-add d-flex justify-content-center align-items-center"
+                  @click="addKeep()"
           >
-            +
-          </div>
+            <i class="fas fa-plus"></i>
+          </button>
         </div>
         <div id="profile-row-keeps"
              class="row"
@@ -63,7 +65,7 @@
   </div>
 </template>
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onBeforeUnmount, onMounted, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { profileService } from '../services/ProfileService'
@@ -82,9 +84,17 @@ export default {
       profileService.getVaults(route.params.id)
       profileService.getKeeps(route.params.id)
     })
+    // Watch for login, try getting private vaults
+    watchEffect(() => { if (account.value.id) { profileService.getVaults(route.params.id) } })
     // Functions
     const addVault = () => { openModal('add_vault') }
     const addKeep = () => { openModal('add_keep') }
+    // Clear the user after leaving
+    onBeforeUnmount(() => {
+      AppState.activeProfile = null
+      AppState.activeProfileVaults = []
+      AppState.activeProfileKeeps = []
+    })
     return {
       // Variables
       account,
