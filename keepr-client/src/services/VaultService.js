@@ -5,8 +5,15 @@ const baseURL = '/api/vaults/'
 
 class VaultService {
   async getVault(id) {
-    const res = await api.get(baseURL + id)
-    AppState.activeVault = res.data
+    try {
+      const res = await api.get(baseURL + id)
+      AppState.authorized.vault = true
+      AppState.activeVault = res.data
+      AppState.opening.vault = true
+      setTimeout(() => { AppState.animating.vault = false; AppState.opening.vault = false }, 1000)
+    } catch (error) {
+      AppState.authorized.vault = false
+    }
   }
 
   async getKeeps(id) {
@@ -24,6 +31,7 @@ class VaultService {
 
   async delete(id) {
     await api.delete(baseURL + id)
+    return 'deleted'
   }
 }
 

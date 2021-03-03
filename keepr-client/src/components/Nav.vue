@@ -1,5 +1,5 @@
 <template lang="">
-  <div id="my-nav-bar" class="container-fluid">
+  <div id="my-nav-bar" class="container-fluid" @click="clearVaultDelete()">
     <div id="my-nav-row" class="row">
       <div class="col-3 my-nav-column d-flex justify-content-start align-items-center">
         <button
@@ -69,13 +69,15 @@ export default {
     const user = computed(() => AppState.user)
     const account = computed(() => AppState.account)
     // Functions
-    const homePage = () => { router.push({ path: '/' }) }
+    const homePage = () => { router.push({ name: 'Home' }) }
     const search = () => {
     }
     const login = async () => { AuthService.loginWithPopup() }
     const openProfile = () => {
       router.push({ path: '/profile/' + account.value.id })
     }
+    // Clear deletes for vaults (so they can click ANYWHERE)
+    const clearVaultDelete = () => { AppState.deleting.vault = false }
     return {
       // Variables
       form,
@@ -84,7 +86,8 @@ export default {
       homePage,
       search,
       login,
-      openProfile
+      openProfile,
+      clearVaultDelete
     }
   }
 }

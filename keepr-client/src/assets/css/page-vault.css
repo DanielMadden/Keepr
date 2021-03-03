@@ -1,2 +1,9 @@
 @import "global.css";
 @import "keep.css";
+#vault-delete.confirm {
+  color: red
+}
+
+.red {
+  color: rgb(97, 1, 1);
+}

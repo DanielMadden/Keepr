@@ -23,7 +23,9 @@
           <i class="fas fa-eye"></i> {{ keep.views }}
         </div>
         <div class="modal-keep-stats mx-5">
-          <i class="fab fa-kickstarter"></i> {{ keep.keeps }}
+          <i class="fab fa-kickstarter"></i>
+          <!-- <i class="fab fa-korvue"></i> -->
+          {{ keep.keeps }}
         </div>
         <div class="modal-keep-stats">
           <i class="fas fa-share-alt"></i> {{ keep.shares }}

@@ -16,10 +16,11 @@ export function openModal(modalChoice) {
   ModalState['active_' + modalChoice] = true
 }
 
-// closeModals() cycles through all properties and sets them to false
+// closeModals() cycles through all properties of the ModalState and sets them to false
 export const closeModals = () => {
   const keyVal = Object.keys(ModalState)
   keyVal.forEach(key => {
+    // There are "d" "s" and "a" properties on reactive objects. Ignore them.
     if (key !== 'd' || key !== 's' || key !== 'a') {
       ModalState[key] = false
     }

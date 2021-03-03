@@ -7,15 +7,23 @@
 }
 
 .profile-button-add {
-  width: 1em;
-  height: 1em;
   color: var(--accent-color);
-  font-size: 2em;
+  font-size: 1.5em;
+  width: 2em;
+  height: 2em;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  border-radius: 10px;
 }
 
 .profile-button-add:hover {
   color: white;
   background-color: var(--accent-color);
+  cursor: pointer;
+}
+
+.profile-button-add:focus {
+  outline: none;
 }
 
 .profile-col-vaults {

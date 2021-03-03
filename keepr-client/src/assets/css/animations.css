@@ -15,3 +15,42 @@
     transform: rotate(0deg)
   }
 }
+
+@keyframes pageLoad-spinner {
+  0% {
+    font-size: 0vh;
+    opacity: 0;
+  }
+  50% {
+    font-size: 60vh
+  }
+  75% {
+    font-size: 45vh
+  }
+  100% {
+    font-size: 50vh;
+    opacity: 1;
+  }
+}
+
+@keyframes pageLoad-logo {
+  0% {
+    font-size: 0vh;
+    opacity: 0.5
+  }
+  50% {
+    font-size: 30vh
+  }
+  75% {
+    font-size: 20vh
+  }
+  100% {
+    font-size: 25vh;
+    opacity: 1;
+  }
+}
+
+.slow-spin {
+  -webkit-animation: fa-spin 6s infinite linear;
+  animation: fa-spin 6s infinite linear;
+}

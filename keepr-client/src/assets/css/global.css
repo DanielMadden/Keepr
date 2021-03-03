@@ -43,6 +43,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: var(--viewport-padding-y);
 }
 
+.viewport.pinch {
+  padding-right: calc(var(--viewport-padding-x) - 8px);
+  padding-left: calc(var(--viewport-padding-x) - 8px);
+}
+
 .masonry-2, .masonry-4, .masonry-5, .masonry-6 {
   column-gap: 1em;
 }
@@ -70,4 +75,75 @@ h1, h2, h3, h4, h5, h6 {
 
 .shake {
   animation: shake .5s linear 0s infinite normal;
+}
+
+.no-stretch {
+  align-items: flex-start;
+}
+
+/* .loader-page {
+  position: relative;
+  width: 25%;
+  height: 25%;
+} */
+
+.loader-page-container {
+  --split: 100%;
+  --transition-time: .5s;
+  --animation-time: 1s;
+}
+
+.loader-page-container.showMessage {
+  --split: 70%;
+}
+
+.loader-page-spinner, .loader-page-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--split);
+  transition: all var(--transition-time);
+}
+
+.loader-page-message {
+  position: absolute;
+  top: var(--split);
+  left: 0;
+  width: 100%;
+  height: calc(100% - var(--split));
+  transition: all var(--transition-time);
+  font-size: 300%;
+  opacity: 0;
+}
+
+.loader-page-container.showMessage .loader-page-message {
+  opacity: 1;
+}
+
+.loader-page-spinner {
+  font-size: 50vh;
+}
+
+.loader-page-logo {
+  font-size: 25vh;
+  color: white
+}
+
+.loader-page-spinner.animate-in {
+  animation: pageLoad-spinner var(--animation-time) 1 ease-in-out normal;
+}
+
+.loader-page-logo.animate-in {
+  animation: pageLoad-logo var(--animation-time) 1 ease-in-out normal;
+}
+
+.loader-page-spinner.animate-out {
+  animation: pageLoad-spinner var(--animation-time) 1 ease-in-out reverse;
+  font-size: 0;
+}
+
+.loader-page-logo.animate-out {
+  animation: pageLoad-logo var(--animation-time) 1 ease-in-out reverse;
+  font-size: 0;
 }

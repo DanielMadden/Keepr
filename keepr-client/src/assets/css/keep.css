@@ -4,9 +4,19 @@
   font-weight: 600;
 }
 
-.masonry-6 .keep .keep-name {
+.masonry-4 .keep .keep-remove {
   font-size: 150%;
   font-weight: 400;
+}
+
+.masonry-6 .keep .keep-name, .masonry-6 .keep .keep-remove {
+  font-size: 150%;
+  font-weight: 400;
+}
+
+.masonry-6 .keep .keep-remove {
+  font-size: 100%;
+  font-weight: 300;
 }
 
 .keep {
@@ -16,12 +26,44 @@
   border-radius: var(--border-radius);
   display: inline-block;
   margin: 0 0 1em;
+  /* box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3) */
 }
+
+/* .keep:hover {} */
 
 .keep-img {
   width: 100%;
   border-radius: var(--border-radius);
 }
+
+.keep-remove {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  opacity: 0;
+  border: none;
+  border-radius: 100%;
+  box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.3);
+  background-color: var(--accent-color-button);
+  color: white;
+  transition: all .1s
+}
+
+.keep:hover .keep-remove {
+  opacity: .5;
+}
+
+.keep-remove:hover {
+  background-color: red;
+  box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.3);
+  opacity: 1 !important;
+  transform: scale(1.2);
+}
+
+.keep-remove i {}
 
 .keep-name {
   position: absolute;
