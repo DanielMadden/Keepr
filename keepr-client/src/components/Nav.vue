@@ -1,19 +1,19 @@
 <template lang="">
   <div id="my-nav-bar" class="container-fluid" @click="clearVaultDelete()">
     <div id="my-nav-row" class="row">
-      <div class="col-3 my-nav-column d-flex justify-content-start align-items-center">
+      <div class="col-2 my-nav-column d-flex justify-content-start align-items-center">
         <button
-          id="nav-logo"
+          id="nav-logo-container"
           class="d-flex justify-content-center align-items-center"
           @click="homePage()"
         >
           <div
-            class="logo-spinner d-flex justify-content-center align-items-center animate-in"
+            class="nav-logo-spinner d-flex justify-content-center align-items-center"
           >
-            <i class="fas fa-certificate slow-spin"></i>
+            <i class="fas fa-certificate"></i>
           </div>
           <div
-            class="logo-logo no-stretch d-flex justify-content-center align-items-center animate-in"
+            class="nav-logo-logo no-stretch d-flex justify-content-center align-items-center"
           >
             <i class="fab fa-kickstarter-k"></i>
           </div>
@@ -22,7 +22,7 @@
       <form
         @submit.prevent="search()"
         id="my-nav-search-column"
-        class="col-6 my-nav-column d-flex justify-content-center align-items-center"
+        class="col-8 my-nav-column d-flex justify-content-center align-items-center px-0"
       >
         <!-- <form @submit.prevent="search()"> -->
         <div id="nav-search-box">
@@ -39,7 +39,7 @@
         </div>
         <!-- </form> -->
       </form>
-      <div id="my-nav-search-column" class="col-3 my-nav-column d-flex justify-content-end align-items-center">
+      <div id="my-nav-search-column" class="col-2 my-nav-column d-flex justify-content-end align-items-center">
         <button
           class="my-nav-button"
           @click="login"
@@ -48,16 +48,19 @@
           Login
         </button>
         <button
+          id="nav-button-profile"
           class="my-nav-button d-flex align-items-center"
+          :style="`background: 0, 0, url('${user.picture}') no-repeat center center /cover; overflow-y: hidden`"
           @click="openProfile()"
           v-else
         >
-          <span class="mr-3">
-            <i class="far fa-user"></i>
-          </span>
           <span>
-            {{ user.name }}
+            <!-- class="mr-3" -->
+            <!-- <i class="far fa-user"></i> -->
           </span>
+          <!-- <span>
+            {{ user.name }}
+          </span> -->
         </button>
       </div>
     </div>

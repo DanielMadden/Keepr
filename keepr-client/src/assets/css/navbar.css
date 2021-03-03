@@ -73,6 +73,12 @@ button {
   color: var(--accent-color);
 }
 
+#nav-button-profile {
+  height: 3.5em;
+  width: 3.5em;
+  font-size: 100%;
+}
+
 .my-nav-button {
   border: none;
   background-color: var(--accent-color-button);
@@ -84,8 +90,39 @@ button {
   border-radius: 10px;
 }
 
-.my-nav-button .mr-3 i {
+.my-nav-button span i {
   font-size: 160%;
+}
+
+#nav-logo-container {
+  position: relative;
+  height: 4em;
+  width: 4em;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.nav-logo-spinner, .nav-logo-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-logo-spinner {
+  font-size: 4em;
+}
+
+#nav-logo-container:hover .nav-logo-spinner {
+  -webkit-animation: fa-spin 6s infinite linear;
+  animation: fa-spin 6s infinite linear;
+}
+
+.nav-logo-logo {
+  font-size: 2em;
+  color: white;
 }
 
 /* #my-nav-logo {
