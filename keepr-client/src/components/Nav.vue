@@ -7,9 +7,16 @@
           class="d-flex justify-content-center align-items-center"
           @click="homePage()"
         >
-          <h1 class="m-0">
-            K
-          </h1>
+          <div
+            class="logo-spinner d-flex justify-content-center align-items-center animate-in"
+          >
+            <i class="fas fa-certificate slow-spin"></i>
+          </div>
+          <div
+            class="logo-logo no-stretch d-flex justify-content-center align-items-center animate-in"
+          >
+            <i class="fab fa-kickstarter-k"></i>
+          </div>
         </button>
       </div>
       <form

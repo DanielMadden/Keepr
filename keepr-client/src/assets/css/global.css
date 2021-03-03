@@ -30,6 +30,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+button:focus {
+  outline: none !important;
+  cursor: pointer !important;
+}
+
 .viewport {
   position: fixed;
   top: var(--nav-height);
@@ -48,7 +53,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: calc(var(--viewport-padding-x) - 8px);
 }
 
-.masonry-2, .masonry-4, .masonry-5, .masonry-6 {
+.masonry-2, .masonry-5, .masonry-6 {
   column-gap: 1em;
 }
 
@@ -58,6 +63,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .masonry-4 {
   column-count: 4;
+  column-gap: 3em;
 }
 
 .masonry-5 {

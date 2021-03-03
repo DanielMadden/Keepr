@@ -1,20 +1,24 @@
 @import "global.css";
+.masonry-4 .keep {
+  margin-bottom: 3em;
+}
+
 .masonry-4 .keep .keep-name {
   font-size: 200%;
   font-weight: 600;
 }
 
-.masonry-4 .keep .keep-remove {
+.masonry-4 .keep .keep-remove, .masonry-4 .keep .keep-profile {
   font-size: 150%;
   font-weight: 400;
 }
 
-.masonry-6 .keep .keep-name, .masonry-6 .keep .keep-remove {
+.masonry-6 .keep .keep-name {
   font-size: 150%;
   font-weight: 400;
 }
 
-.masonry-6 .keep .keep-remove {
+.masonry-6 .keep .keep-remove, .masonry-6 .keep .keep-profile {
   font-size: 100%;
   font-weight: 300;
 }
@@ -26,14 +30,42 @@
   border-radius: var(--border-radius);
   display: inline-block;
   margin: 0 0 1em;
+  cursor: pointer;
   /* box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3) */
 }
-
-/* .keep:hover {} */
 
 .keep-img {
   width: 100%;
   border-radius: var(--border-radius);
+}
+
+.keep-profile {
+  position: absolute;
+  bottom: .5em;
+  right: .5em;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  border: none;
+  border-radius: 100%;
+  box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.3);
+  transition: all .1s;
+  opacity: 0
+}
+
+.keep:hover .keep-profile {
+  opacity: 1
+}
+
+.keep-profile:hover {
+  box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.3);
+  opacity: 1 !important;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.keep-profile:focus {
+  outline: none;
 }
 
 .keep-remove {
@@ -47,7 +79,7 @@
   border: none;
   border-radius: 100%;
   box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.3);
-  background-color: var(--accent-color-button);
+  background-color: red;
   color: white;
   transition: all .1s
 }
@@ -61,15 +93,22 @@
   box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.3);
   opacity: 1 !important;
   transform: scale(1.2);
+  cursor: pointer;
 }
 
 .keep-remove i {}
 
 .keep-name {
   position: absolute;
-  bottom: .5em;
+  bottom: .25em;
   left: .5em;
   color: white;
+  transition: all .1s;
+  opacity: 0.5;
+}
+
+.keep:hover .keep-name {
+  opacity: 1;
 }
 
 .keep-darken {

@@ -2,7 +2,7 @@
   <div>
     <div class="viewport" v-show="loaded && !animating">
       <!-- <transition name="fade"> -->
-      <div class="masonry-6">
+      <div class="masonry-4">
         <Keep v-for="keep in keeps" :key="keep.id" :keep="keep"></Keep>
       </div>
       <!-- </transition> -->

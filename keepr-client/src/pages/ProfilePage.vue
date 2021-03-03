@@ -34,12 +34,15 @@
         <div id="profile-row-vaults"
              class="row"
         >
-          <div class="profile-col-vaults col-2"
+          <!-- <div class="profile-col-vaults col-3"
                v-for="vault in vaults"
                :key="vault.id"
                v-show="loadedVaults"
           >
             <Vault :vault="vault"></Vault>
+          </div> -->
+          <div v-show="loadedVaults" class="masonry-4">
+            <Vault v-for="vault in vaults" :key="vault.id" :vault="vault"></Vault>
           </div>
           <div class="profile-loading pl-2 col-2 d-flex justify-content-center align-items-center" v-if="!loadedVaults">
             <i class="fas fa-sync-alt fa-spin"></i>
@@ -93,15 +96,17 @@ export default {
     onMounted(async () => {
       AppState.loaded.profileVaults = false
       AppState.loaded.profileKeeps = false
-      profileService.getProfile(route.params.id)
-      profileService.getVaults(route.params.id)
-      profileService.getKeeps(route.params.id)
+      await profileService.getProfile(route.params.id)
+      setTimeout(() => { AppState.loaded.profileVaults = true }, 1000)
+      await profileService.getVaults(route.params.id)
+      setTimeout(() => { AppState.loaded.profileKeeps = true }, 1000)
+      await profileService.getKeeps(route.params.id)
     })
     // Watch for login, try getting private vaults
     watchEffect(() => { if (account.value.id) { profileService.getVaults(route.params.id) } })
     // Watch for keeps and vaults loading in
-    watchEffect(() => { if (vaults.value.length > 0) { setTimeout(() => { AppState.loaded.profileVaults = true }, 500) } })
-    watchEffect(() => { if (keeps.value.length > 0) { setTimeout(() => { AppState.loaded.profileKeeps = true }, 500) } })
+    // watchEffect(() => { if (vaults.value.length > 0) { setTimeout(() => { AppState.loaded.profileVaults = true }, 500) } })
+    // watchEffect(() => { if (keeps.value.length > 0) { setTimeout(() => { AppState.loaded.profileKeeps = true }, 500) } })
     // Functions
     const addVault = () => { openModal('add_vault') }
     const addKeep = () => { openModal('add_keep') }
