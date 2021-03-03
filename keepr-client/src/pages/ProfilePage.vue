@@ -25,6 +25,7 @@
             Vaults
           </h1>
           <button class="profile-button-add d-flex justify-content-center align-items-center"
+                  v-if="profile.id == account.id"
                   @click="addVault()"
           >
             <i class="fas fa-plus"></i>
@@ -36,8 +37,12 @@
           <div class="profile-col-vaults col-2"
                v-for="vault in vaults"
                :key="vault.id"
+               v-show="loadedVaults"
           >
             <Vault :vault="vault"></Vault>
+          </div>
+          <div class="profile-loading pl-2 col-2 d-flex justify-content-center align-items-center" v-if="!loadedVaults">
+            <i class="fas fa-sync-alt fa-spin"></i>
           </div>
         </div>
         <div class="row py-3"></div>
@@ -48,6 +53,7 @@
             Keeps
           </h1>
           <button class="profile-button-add d-flex justify-content-center align-items-center"
+                  v-if="profile.id == account.id"
                   @click="addKeep()"
           >
             <i class="fas fa-plus"></i>
@@ -56,8 +62,11 @@
         <div id="profile-row-keeps"
              class="row"
         >
-          <div class="masonry-6">
+          <div v-show="loadedKeeps" class="masonry-6">
             <Keep v-for="keep in keeps" :key="keep.id" :keep="keep"></Keep>
+          </div>
+          <div class="profile-loading pl-2 col-2 d-flex justify-content-center align-items-center" v-if="!loadedKeeps">
+            <i class="fas fa-sync-alt fa-spin"></i>
           </div>
         </div>
       </div>
@@ -78,14 +87,21 @@ export default {
     const profile = computed(() => AppState.activeProfile)
     const vaults = computed(() => AppState.activeProfileVaults)
     const keeps = computed(() => AppState.activeProfileKeeps)
+    const loadedVaults = computed(() => AppState.loaded.profileVaults)
+    const loadedKeeps = computed(() => AppState.loaded.profileKeeps)
     // On Mount
     onMounted(async () => {
+      AppState.loaded.profileVaults = false
+      AppState.loaded.profileKeeps = false
       profileService.getProfile(route.params.id)
       profileService.getVaults(route.params.id)
       profileService.getKeeps(route.params.id)
     })
     // Watch for login, try getting private vaults
     watchEffect(() => { if (account.value.id) { profileService.getVaults(route.params.id) } })
+    // Watch for keeps and vaults loading in
+    watchEffect(() => { if (vaults.value.length > 0) { setTimeout(() => { AppState.loaded.profileVaults = true }, 500) } })
+    watchEffect(() => { if (keeps.value.length > 0) { setTimeout(() => { AppState.loaded.profileKeeps = true }, 500) } })
     // Functions
     const addVault = () => { openModal('add_vault') }
     const addKeep = () => { openModal('add_keep') }
@@ -101,6 +117,8 @@ export default {
       profile,
       vaults,
       keeps,
+      loadedVaults,
+      loadedKeeps,
       // Functions
       addVault,
       addKeep

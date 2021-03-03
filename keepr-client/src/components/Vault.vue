@@ -1,9 +1,9 @@
 <template lang="">
   <div class="vault"
-       :style="`background: linear-gradient( rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0)), url('${vault.img}') no-repeat center center /cover; overflow-y: hidden`"
        @click="viewVault()"
   >
-    <!-- <img class="vault-img" :src="vault.img" /> -->
+    <!-- :style="`background: linear-gradient( rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0)), url('${vault.img}') no-repeat center center /cover; overflow-y: hidden`" -->
+    <img class="vault-img" :src="vault.img" />
     <div class="vault-darken"></div>
     <div class="vault-name">
       {{ vault.name }}

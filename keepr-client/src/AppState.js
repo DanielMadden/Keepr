@@ -19,7 +19,9 @@ export const AppState = reactive({
     vault: false
   },
   loaded: {
-    home: false
+    home: false,
+    profileVaults: false,
+    profileKeeps: false
   },
   animating: {
     home: false,

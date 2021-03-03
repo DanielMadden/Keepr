@@ -31,7 +31,20 @@
   padding-right: .5em !important;
 }
 
+#profile-row-vaults {
+  min-height: 12em;
+}
+
 #profile-row-keeps {
   padding-left: .5em;
   padding-right: .5em
+}
+
+.profile-loading {
+  height: 10em;
+  margin-bottom: 1em;
+}
+
+.profile-loading i {
+  font-size: 250%;
 }
