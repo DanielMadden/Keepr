@@ -1,5 +1,6 @@
 /* @import "bootstrap"; */
 
+@import "animations.css";
 :root {
   --accent-color: var(--myColor-aqua);
   --accent-color-dark: var(--myColor-teal);
@@ -42,17 +43,31 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: var(--viewport-padding-y);
 }
 
+.masonry-2, .masonry-4, .masonry-5, .masonry-6 {
+  column-gap: 1em;
+}
+
+.masonry-2 {
+  column-count: 2;
+}
+
 .masonry-4 {
   column-count: 4;
-  column-gap: 1em;
+}
+
+.masonry-5 {
+  column-count: 5;
 }
 
 .masonry-6 {
   column-count: 6;
-  column-gap: 1em;
 }
 
 .in-container {
   margin-left: -15px;
   margin-right: -15px;
+}
+
+.shake {
+  animation: shake .5s linear 0s infinite normal;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="viewport">
-    <div class="masonry-4">
+    <div class="masonry-6">
       <Keep v-for="keep in keeps" :key="keep.id" :keep="keep"></Keep>
     </div>
   </div>

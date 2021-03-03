@@ -1,4 +1,8 @@
 #myModal-screen {
+  --transition-time: .3s;
+}
+
+#myModal-screen {
   /* position: fixed; */
   top: 0;
   left: 0;
@@ -7,7 +11,7 @@
   position: fixed;
   z-index: 10;
   overflow-y: auto;
-  transition: all 0.3s;
+  transition: all var(--transition-time);
 }
 
 #myModal-clickoff {
@@ -58,6 +62,12 @@
 #myModal-screen.hide {
   pointer-events: none;
   opacity: 0
+}
+
+/* Vue Shit */
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity var(--transition-time);
 }
 
 .myModal-content {

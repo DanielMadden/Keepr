@@ -12,5 +12,9 @@ export const AppState = reactive({
   activeVault: {},
   activeVaultKeeps: {},
   homeKeeps: [],
-  searchResults: []
+  searchResults: [],
+  deleting: {
+    keep: false,
+    vault: false
+  }
 })

@@ -3,6 +3,14 @@
     <div class="container-fluid">
       <div class="row">
         <h1>{{ vault.name }}</h1>
+        <div
+          id="modal-keep-delete"
+          v-if="account.id == keep.creator.id"
+          :class="{ shake: deleting, confirm: deleting }"
+          @click="deleteKeep($event)"
+        >
+          <i class="fa fa-trash"></i>
+        </div>
       </div>
       <div class="row">
         {{ vault.description }}
@@ -17,7 +25,7 @@
   </div>
 </template>
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onBeforeUnmount, onMounted } from 'vue'
 import { vaultService } from '../services/VaultService'
 import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
@@ -25,6 +33,7 @@ export default {
   setup() {
     // Variables
     const route = useRoute()
+    const account = computed(() => AppState.account)
     const vault = computed(() => AppState.activeVault)
     const keeps = computed(() => AppState.activeVaultKeeps)
     // On Mounted
@@ -32,10 +41,34 @@ export default {
       vaultService.getVault(route.params.id)
       vaultService.getKeeps(route.params.id)
     })
+    // Functions
+    let deleteTimeout
+    const clearDelete = () => {
+      clearInterval(deleteTimeout)
+      AppState.deleting.keep = false
+    }
+    const deleting = computed(() => AppState.deleting.vault)
+    const deleteVault = (e) => {
+      e.stopPropagation()
+      if (deleting.value) {
+        vaultService.delete(vault.value.id)
+      } else {
+        AppState.deleting.keep = true
+        deleteTimeout = setTimeout(() => { AppState.deleting.keep = false }, 3000)
+      }
+    }
+    // Before UnMount
+    onBeforeUnmount(() => {
+      clearDelete()
+    })
     return {
-      // Variabls
+      // Variables
+      account,
       vault,
-      keeps
+      keeps,
+      // Functions
+      clearDelete,
+      deleteVault
     }
   }
 }

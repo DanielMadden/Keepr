@@ -11,10 +11,9 @@ export const ModalState = reactive({
 
 // openModal() takes in a string that is the name of the desired modal
 export function openModal(modalChoice) {
-  modalChoice = 'active_' + modalChoice
   ModalState.darken = true
   ModalState.show = true
-  ModalState[modalChoice] = true
+  ModalState['active_' + modalChoice] = true
 }
 
 // closeModals() cycles through all properties and sets them to false

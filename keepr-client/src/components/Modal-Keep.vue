@@ -1,6 +1,7 @@
 <template lang="">
   <div class="row"
        id="modal-keep-container"
+       @click="clearDelete()"
   >
     <div class="col-6"
          id="modal-keep-img"
@@ -11,6 +12,7 @@
     >
       <div class="row d-flex justify-content-end"
            id="modal-keep-row-x"
+           @click="closeModals()"
       >
         X
       </div>
@@ -76,7 +78,11 @@
             <a class="dropdown-item" href="#">Something else here</a> -->
           </div>
         </div>
-        <div id="modal-keep-delete">
+        <div id="modal-keep-delete"
+             v-if="account.id == keep.creator.id"
+             :class="{'shake':deleting, 'confirm':deleting}"
+             @click="deleteKeep($event)"
+        >
           <i class="fa fa-trash"></i>
         </div>
         <div id="modal-keep-profile"
@@ -95,20 +101,22 @@
   </div>
 </template>
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onBeforeUnmount, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { profileService } from '../services/ProfileService'
 import { vaultKeepService } from '../services/VaultKeepService'
+import { closeModals } from '../utils/Modal'
+import { keepService } from '../services/KeepService'
 export default {
   setup() {
-    // Variables
-    const keep = computed(() => AppState.activeKeep)
-    const account = computed(() => AppState.account)
-    const vaults = computed(() => AppState.activeUserVaults)
     // On Mounted
     onMounted(() => {
       profileService.getVaults(account.value.id, true)
     })
+    // Variables
+    const keep = computed(() => AppState.activeKeep)
+    const account = computed(() => AppState.account)
+    const vaults = computed(() => AppState.activeUserVaults)
     // Functions
     const keepToVault = (vaultId) => {
       vaultKeepService.create({
@@ -116,12 +124,39 @@ export default {
         keepId: keep.value.id
       })
     }
+    // Clear delete
+    let deleteTimeout
+    const clearDelete = () => {
+      clearInterval(deleteTimeout)
+      AppState.deleting.keep = false
+    }
+    // Confirm delete, then delete
+    const deleting = computed(() => AppState.deleting.keep)
+    const deleteKeep = (e) => {
+      e.stopPropagation()
+      if (deleting.value) {
+        keepService.delete(keep.value.id)
+        closeModals()
+      } else {
+        AppState.deleting.keep = true
+        deleteTimeout = setTimeout(() => { AppState.deleting.keep = false }, 3000)
+      }
+    }
+    // Before UnMount
+    onBeforeUnmount(() => {
+      clearDelete()
+    })
     return {
       // Variables
       keep,
       vaults,
+      account,
+      deleting,
       // Functions
-      keepToVault
+      keepToVault,
+      closeModals,
+      clearDelete,
+      deleteKeep
     }
   }
 }

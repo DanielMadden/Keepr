@@ -17,9 +17,15 @@
     >
       <!-- Insert all modal components here with their respective v-if's -->
       <!-- <modal-group-info v-if="modalChoice.groupInfo"></modal-group-info> -->
-      <Modal-Keep v-if="modalState.active_keep"></Modal-Keep>
-      <Modal-Add-Vault v-if="modalState.active_add_vault"></Modal-Add-Vault>
-      <Modal-Add-Keep v-if="modalState.active_add_keep"></Modal-Add-Keep>
+      <transition name="fade">
+        <Modal-Keep v-if="modalState.active_keep"></Modal-Keep>
+      </transition>
+      <transition name="fade">
+        <Modal-Add-Vault v-if="modalState.active_add_vault"></Modal-Add-Vault>
+      </transition>
+      <transition name="fade">
+        <Modal-Add-Keep v-if="modalState.active_add_keep"></Modal-Add-Keep>
+      </transition>
     </div>
   </div>
 </template>
