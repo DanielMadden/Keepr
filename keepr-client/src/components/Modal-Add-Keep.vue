@@ -30,6 +30,7 @@
 <script>
 import { computed, reactive } from 'vue'
 import { keepService } from '../services/KeepService'
+import { closeModals } from '../utils/Modal'
 export default {
   setup() {
     // Variables
@@ -43,6 +44,7 @@ export default {
     // Functions
     const createKeep = () => {
       keepService.create(form)
+      closeModals()
     }
     return {
       // Variables

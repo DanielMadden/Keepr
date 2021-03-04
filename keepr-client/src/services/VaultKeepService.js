@@ -1,3 +1,4 @@
+import { AppState } from '../AppState'
 import { api } from './AxiosService'
 
 const baseURL = '/api/vaultkeeps/'
@@ -8,6 +9,7 @@ class VaultKeepService {
   }
 
   async delete(id) {
+    AppState.activeVaultKeeps = AppState.activeVaultKeeps.filter(keep => keep.vaultKeepId !== id)
     await api.delete(baseURL + id)
   }
 }

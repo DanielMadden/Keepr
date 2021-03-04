@@ -1,9 +1,58 @@
 @import "global.css";
 @import "keep.css";
+@keyframes shake-for-vault {
+  0% {
+    transform: rotate(0deg) scale(1.5);
+  }
+  25% {
+    transform: rotate(10deg) scale(1.5)
+  }
+  50% {
+    transform: rotate(0deg) scale(1.5)
+  }
+  75% {
+    transform: rotate(-10deg) scale(1.5)
+  }
+  100% {
+    transform: rotate(0deg) scale(1.5);
+  }
+}
+
+#vault-image {
+  height: fit-content;
+  min-height: 15em;
+  padding: 2em;
+  color: white;
+  border-radius: 10px;
+}
+
+#vault-image:hover #vault-delete {
+  opacity: 0.8
+}
+
+#vault-delete {
+  opacity: 0;
+  color: red;
+  transition: all .2s;
+  cursor: pointer;
+}
+
+#vault-delete:hover {
+  /* transform: scale(1.5); */
+  opacity: 1 !important
+}
+
 #vault-delete.confirm {
-  color: red
+  animation: shake .5s linear 0s infinite normal;
+  color: red;
+  opacity: 1 !important;
+  /* transform: scale(1.5); */
 }
 
 .red {
   color: rgb(97, 1, 1);
+}
+
+.slow-spin.stop-spin {
+  animation: none;
 }

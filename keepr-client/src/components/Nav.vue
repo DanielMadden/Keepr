@@ -66,9 +66,9 @@
           <!-- <div id="nav-button-profile-picture"
                :style="`background: 0, 0, url('${user.picture}') no-repeat center center /cover; overflow-y: hidden`"
           ></div> -->
-          <span id="nav-button-profile-name">
+          <!-- <span id="nav-button-profile-name">
             {{ user.name }}
-          </span>
+          </span> -->
           <!-- <span>
             {{ user.name }}
           </span> -->

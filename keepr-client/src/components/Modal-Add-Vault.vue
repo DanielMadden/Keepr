@@ -30,6 +30,7 @@
 <script>
 import { reactive } from 'vue'
 import { vaultService } from '../services/VaultService'
+import { closeModals } from '../utils/Modal'
 export default {
   setup() {
     // Variables
@@ -42,6 +43,7 @@ export default {
     // Functions
     const createVault = () => {
       vaultService.create(form)
+      closeModals()
     }
     return {
       // Variables

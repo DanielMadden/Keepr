@@ -1,6 +1,7 @@
 /* @import "bootstrap"; */
 
 @import "animations.css";
+@import "fonts.css";
 :root {
   --accent-color: var(--bcwColor-pink);
   --accent-color-dark: var(--myColor-teal);
@@ -25,6 +26,10 @@
 :root {
   --viewport-padding-x: 3em;
   --viewport-padding-y: 3em;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -55,20 +60,30 @@ button:focus {
 }
 
 .masonry-2, .masonry-5, .masonry-6 {
-  column-gap: 1em;
+  --gap: 1em;
+  column-gap: var(--gap)
 }
 
 .masonry-2 {
   column-count: 2;
 }
 
+.masonry-3 {
+  column-count: 3;
+  --gap: 1em;
+  column-gap: var(--gap)
+}
+
 .masonry-4 {
   column-count: 4;
-  column-gap: 3em;
+  --gap: 3em;
+  column-gap: var(--gap)
 }
 
 .masonry-5 {
   column-count: 5;
+  --gap: 1em;
+  column-gap: var(--gap)
 }
 
 .masonry-6 {

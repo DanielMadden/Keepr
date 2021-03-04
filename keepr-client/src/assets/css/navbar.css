@@ -4,7 +4,7 @@
 }
 
 button {
-  cursor: pointer
+  cursor: pointer;
 }
 
 #my-nav-bar {
@@ -64,6 +64,7 @@ button {
   opacity: 0;
   transition: all .2s;
   user-select: none;
+  font-family: 'Fredoka One', cursive;
 }
 
 #nav-logo-container:hover+#nav-logo-continued {
@@ -122,7 +123,7 @@ button {
   border-radius: 10px;
 }
 
-#nav-button-profile:hover {
+#nav-button-profile:hover+#nav-profile-name {
   width: fit-content;
   max-width: 100%;
   min-width: 3.5em;

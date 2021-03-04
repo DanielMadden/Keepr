@@ -1,5 +1,6 @@
 import { AppState } from '../AppState'
 import { api } from './AxiosService'
+import { profileService } from './ProfileService'
 
 const baseURL = '/api/vaults/'
 
@@ -23,6 +24,7 @@ class VaultService {
 
   async create(newVault) {
     await api.post(baseURL, newVault)
+    profileService.getVaults(AppState.account.id)
   }
 
   async edit(newVault) {

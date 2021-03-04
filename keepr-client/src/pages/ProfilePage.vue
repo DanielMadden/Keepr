@@ -65,7 +65,7 @@
         <div id="profile-row-keeps"
              class="row"
         >
-          <div v-show="loadedKeeps" class="masonry-6">
+          <div v-show="loadedKeeps" class="masonry-5">
             <Keep v-for="keep in keeps" :key="keep.id" :keep="keep"></Keep>
           </div>
           <div class="profile-loading pl-2 col-2 d-flex justify-content-center align-items-center" v-if="!loadedKeeps">

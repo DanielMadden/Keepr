@@ -1,6 +1,19 @@
 @import "global.css";
+.masonry-3 .keep {
+  margin-bottom: var(--gap)
+}
+
 .masonry-4 .keep {
-  margin-bottom: 3em;
+  margin-bottom: var(--gap);
+}
+
+.masonry-5 .keep {
+  margin-bottom: var(--gap)
+}
+
+.masonry-3 .keep {
+  font-size: 200%;
+  font-weight: 600;
 }
 
 .masonry-4 .keep .keep-name {
@@ -31,7 +44,8 @@
   display: inline-block;
   margin: 0 0 1em;
   cursor: pointer;
-  /* box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3) */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300 !important;
 }
 
 .keep-img {
@@ -43,6 +57,8 @@
   position: absolute;
   bottom: .5em;
   right: .5em;
+  /* top: .5em;
+  left: .5em; */
   width: 1.5em;
   height: 1.5em;
   display: inline-block;
@@ -104,7 +120,7 @@
   left: .5em;
   color: white;
   transition: all .1s;
-  opacity: 0.5;
+  opacity: 0;
 }
 
 .keep:hover .keep-name {

@@ -1,5 +1,6 @@
 import { AppState } from '../AppState'
 import { api } from './AxiosService'
+import { profileService } from './ProfileService'
 
 const baseURL = '/api/keeps/'
 
@@ -18,6 +19,8 @@ class KeepService {
 
   async create(newKeep) {
     await api.post(baseURL, newKeep)
+    this.getAll()
+    profileService.getKeeps(AppState.account.id)
   }
 
   async edit(newKeep) {
@@ -25,6 +28,8 @@ class KeepService {
   }
 
   async delete(id) {
+    AppState.homeKeeps = AppState.homeKeeps.filter(keep => keep.id !== id)
+    AppState.activeProfileKeeps = AppState.activeProfileKeeps.filter(keep => keep.id !== id)
     await api.delete(baseURL + id)
   }
 }

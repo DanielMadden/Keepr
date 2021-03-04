@@ -7,25 +7,37 @@
           <span>Deleting...</span>
         </div>
         <div class="container-fluid" v-else>
-          <div class="row d-flex align-items-center">
-            <h1>{{ vault.name }}</h1>
-            <div
-              id="vault-delete"
-              v-if="account.id == vault.creator.id"
-              :class="{ shake: deleting, confirm: deleting }"
-              @click="deleteVault($event)"
-            >
-              <h1>
-                <i class="fa fa-trash"></i>
-              </h1>
+          <div
+            class="row"
+            id="vault-image"
+            :style="`background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.2)), url('${vault.img}') no-repeat center center /cover; overflow-y: hidden`"
+          >
+            <div class="col">
+              <div
+                class="row d-flex justify-content-between align-items-center"
+              >
+                <h1>{{ vault.name }}</h1>
+                <div
+                  id="vault-delete"
+                  v-if="account.id == vault.creator.id"
+                  :class="{ shake: deleting, confirm: deleting }"
+                  @click="deleteVault($event)"
+                >
+                  <h1>
+                    <i class="fa fa-trash"></i>
+                  </h1>
+                </div>
+              </div>
+              <div class="row">
+                {{ vault.description }}
+              </div>
             </div>
           </div>
+          <div class="row py-3"></div>
           <div class="row">
-            {{ vault.description }}
+            <h1>{{ keeps.length }} Keeps</h1>
           </div>
-          <div class="row">
-            <span>Keeps: {{ keeps.length }}</span>
-          </div>
+          <div class="row py-3"></div>
         </div>
         <div class="masonry-4">
           <Keep
@@ -48,7 +60,11 @@
         >
           <i
             class="fas fa-certificate"
-            :class="{ 'slow-spin': authorizing || authorized }"
+            :class="{
+              'slow-spin': authorizing || authorized,
+              'stop-spin':
+                isPrivate && authorizing && !loggingIn && !account.id,
+            }"
           ></i>
         </div>
         <div

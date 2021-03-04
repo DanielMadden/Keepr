@@ -33,6 +33,8 @@
 
 #profile-row-vaults {
   min-height: 12em;
+  padding-left: .5em;
+  padding-right: .5em;
 }
 
 #profile-row-keeps {
