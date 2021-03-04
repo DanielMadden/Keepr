@@ -2,14 +2,15 @@
 
 @import "animations.css";
 :root {
-  --accent-color: var(--myColor-aqua);
+  --accent-color: var(--bcwColor-pink);
   --accent-color-dark: var(--myColor-teal);
-  --accent-color-text: var(--myColor-dark);
-  --accent-color-button: var(--myColor-dark);
+  --accent-color-text: black;
+  --accent-color-button: black;
 }
 
 :root {
   --bcwColor-green: #55EFC4;
+  --bcwColor-pink: #FF7675;
   --myColor-aqua: #82dddd;
   --myColor-lime: #b5d333;
   --myColor-teal: #42646b;
@@ -18,7 +19,7 @@
   --myColor-smoky-blue: #98a6b3;
   --myColor-purple: #60323f;
   --myColor-brown: #5b4a40;
-  --myColor-dark: rgb(36, 39, 41);
+  --myColor-dark: rgb(41, 36, 36);
 }
 
 :root {

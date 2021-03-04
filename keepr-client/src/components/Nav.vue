@@ -1,7 +1,7 @@
 <template lang="">
   <div id="my-nav-bar" class="container-fluid" @click="clearVaultDelete()">
     <div id="my-nav-row" class="row">
-      <div class="col-2 my-nav-column d-flex justify-content-start align-items-center">
+      <div class="col-3 my-nav-column d-flex justify-content-start align-items-center">
         <button
           id="nav-logo-container"
           class="d-flex justify-content-center align-items-center"
@@ -18,11 +18,14 @@
             <i class="fab fa-kickstarter-k"></i>
           </div>
         </button>
+        <h1 id="nav-logo-continued">
+          eepr
+        </h1>
       </div>
       <form
         @submit.prevent="search()"
         id="my-nav-search-column"
-        class="col-8 my-nav-column d-flex justify-content-center align-items-center px-0"
+        class="col-6 my-nav-column d-flex justify-content-center align-items-center px-0"
       >
         <!-- <form @submit.prevent="search()"> -->
         <div id="nav-search-box">
@@ -31,6 +34,9 @@
             class="my-nav-bar-item"
             type="text"
             placeholder="Search..."
+            @focus="expandSearch()"
+            @focusout="shrinkSearch()"
+            autocomplete="off"
             v-model="form.text"
           />
           <div id="nav-search-icon" class="d-flex justify-content-center align-items-center">
@@ -39,7 +45,7 @@
         </div>
         <!-- </form> -->
       </form>
-      <div id="my-nav-search-column" class="col-2 my-nav-column d-flex justify-content-end align-items-center">
+      <div id="my-nav-search-column" class="col-3 my-nav-column d-flex justify-content-end align-items-center">
         <button
           class="my-nav-button"
           @click="login"
@@ -50,13 +56,18 @@
         <button
           id="nav-button-profile"
           class="my-nav-button d-flex align-items-center"
-          :style="`background: 0, 0, url('${user.picture}') no-repeat center center /cover; overflow-y: hidden`"
           @click="openProfile()"
           v-else
         >
-          <span>
+          <span id="nav-button-profile-icon">
             <!-- class="mr-3" -->
-            <!-- <i class="far fa-user"></i> -->
+            <i class="far fa-user"></i>
+          </span>
+          <!-- <div id="nav-button-profile-picture"
+               :style="`background: 0, 0, url('${user.picture}') no-repeat center center /cover; overflow-y: hidden`"
+          ></div> -->
+          <span id="nav-button-profile-name">
+            {{ user.name }}
           </span>
           <!-- <span>
             {{ user.name }}
@@ -80,6 +91,12 @@ export default {
     const account = computed(() => AppState.account)
     // Functions
     const homePage = () => { router.push({ name: 'Home' }) }
+    const expandSearch = () => {
+      document.getElementById('nav-search-box').style.width = '100%'
+    }
+    const shrinkSearch = () => {
+      document.getElementById('nav-search-box').style.width = '80%'
+    }
     const search = () => {
     }
     const login = async () => { AuthService.loginWithPopup() }
@@ -94,6 +111,8 @@ export default {
       user,
       // Functions
       homePage,
+      expandSearch,
+      shrinkSearch,
       search,
       login,
       openProfile,
