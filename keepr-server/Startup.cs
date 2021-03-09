@@ -109,6 +109,12 @@ namespace keepr
 
       app.UseAuthorization();
 
+      // NOTE use the default file paths for finding the client
+      app.UseDefaultFiles();
+
+      // NOTE use a static file for serving the client
+      app.UseStaticFiles();
+
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
