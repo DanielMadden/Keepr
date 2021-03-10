@@ -23,7 +23,8 @@
           Create
         </button>
       </div>
-      {{ form }}
+      <!-- TODO test the tags -->
+      <!-- {{ form }} -->
     </div>
   </div>
 </template>
